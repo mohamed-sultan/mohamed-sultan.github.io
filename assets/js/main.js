@@ -167,7 +167,9 @@
       let ip = data.ipAddress;
       $.getJSON(
         `https://cv-preview.herokuapp.com/?country=${country}&ip=${ip}`,
-        function (d) {}
+        function (d) {
+          console.log("");
+        }
       );
     });
   });
