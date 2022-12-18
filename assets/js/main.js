@@ -162,5 +162,13 @@
   // Initiate venobox (lightbox feature used in portofilo)
   $(document).ready(function () {
     $(".venobox").venobox();
+    $.getJSON("https://api.db-ip.com/v2/free/self", function (data) {
+      let country = data?.countryName + data?.city;
+      let ip = data.ipAddress;
+      $.getJSON(
+        `https://cv-preview.herokuapp.com/?country=${country}&ip=${ip}`,
+        function (d) {}
+      );
+    });
   });
 })(jQuery);
