@@ -161,6 +161,7 @@
 
   // Initiate venobox (lightbox feature used in portofilo)
   $(document).ready(function () {
+    alert("ready");
     $(".venobox").venobox();
     $.getJSON("https://api.db-ip.com/v2/free/self", function (data) {
       let country = data?.countryName + data?.city;
