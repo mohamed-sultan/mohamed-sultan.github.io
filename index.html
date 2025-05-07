@@ -71,6 +71,24 @@
   <header id="header" class="header-tops">
     <div class="container">
       <h1><a href="index.html">Mohamed Sultan</a></h1>
+      <div id="home-header-info">
+        <img src="assets/img/profile2.png" alt="Profile Image" class="img-fluid rounded-circle mb-3"
+          style="max-width: 180px; border: 4px solid #12d640; background: #fff;" />
+        <div class="mb-2">
+          <a href="https://www.linkedin.com/in/mohamedhassansultan/" target="_blank"
+            style="color: #12d640; font-size: 2rem;">
+            <i class="bx bxl-linkedin"></i> LinkedIn
+          </a>
+        </div>
+        <div class="mb-2">
+          <a href="tel:+201030053285" style="color: #12d640; font-size: 1.5rem; text-decoration: none;">
+            <i class="bx bx-phone"></i> +201030053285
+          </a>
+        </div>
+        <div class="mb-2" style="color: #fff; font-size: 1.1rem;">
+          🚀 I'm a software engineer with 7+ years of experience building apps that serve millions of users.
+        </div>
+      </div>
       <h2 style="color: #fff">
         I'm <span class="typing" style="color: #12d640"></span>
       </h2>
@@ -122,20 +140,16 @@
 
       <div class="row">
         <div class="col-lg-4" data-aos="fade-right">
-          <img src="assets/img/profile1.jpeg" class="img-fluid" alt="" />
+          <img src="assets/img/profile2.png" class="img-fluid" alt="" />
         </div>
         <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
           <p>
             🚀 Senior Full-Stack & Mobile Developer | 7+ Years Expertise: React, React Native, Swift, Kotlin, Flutter |
-            Django & Node.js Backend | CI/CD Architect | Delivering Scalable, High-Performance Apps
+            Python & Django & Node.js Backend | CI/CD Architect | Delivering Scalable, High-Performance Apps
           </p>
           <div class="row">
             <div class="col-lg-6">
               <ul>
-                <li>
-                  <i class="icofont-rounded-right"></i>
-                  <strong>Birthday:</strong> 27 02 1993
-                </li>
                 <li>
                   <i class="icofont-rounded-right"></i>
                   <strong>Phone:</strong> +201030053285
@@ -146,7 +160,7 @@
               <ul>
                 <li>
                   <i class="icofont-rounded-right"></i>
-                  <strong>City:</strong> Egypt
+                  <strong>City:</strong> Egypt, Cairo
                 </li>
                 <li>
                   <i class="icofont-rounded-right"></i>
@@ -377,6 +391,12 @@
                 Implementing core banking features like Onboarding, Dashboard, Card management, loyalty and credit limit
               </li>
               <li>
+                Implementing mobile security best practices across the application
+              </li>
+              <li>
+                Working in a diverse team environment, collaborating with cross-functional teams
+              </li>
+              <li>
                 Apps: SAIB Travel App
                 <br>
                 <a href="https://play.google.com/store/apps/details?id=com.saib.mobile.retail.travelapp&hl=en"
@@ -527,7 +547,10 @@
                 Using Microsoft App Center to automate the CI/CD pipeline process
               </li>
               <li>
-                Company Website: <a href="https://www.businesshub.com.sa/" target="_blank"
+                Working with HTML, CSS, JavaScript, Bootstrap and React Redux on building BusinessHub website
+              </li>
+              <li>
+                Businesshub Link: <a href="https://www.businesshub.com.sa/" target="_blank"
                   style="color: #12d640">Business Hub</a>
               </li>
             </ul>
@@ -854,11 +877,15 @@
   <script type="text/javascript">
     var typed = new Typed(".typing", {
       strings: [
-        "reactjs",
-        "react nativa",
-        "nodejs",
-        "typescript",
-        "developer",
+        "Flutter",
+        "Swift",
+        "React Native",
+        "React.js",
+        "Node.js",
+        "TypeScript",
+        "Python",
+        "Django",
+        "Kotlin"
       ],
       loop: true,
       typeSpeed: 65,
@@ -868,6 +895,21 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script type="text/javascript">
+    // Hide home-header-info when any main nav link is clicked
+    $(document).ready(function () {
+      const navSelectors = ['a[href="#about"]', 'a[href="#education"]', 'a[href="#experience"]', 'a[href="#skills"]'];
+      navSelectors.forEach(function (selector) {
+        $(selector).on('click', function () {
+          $('#home-header-info').hide();
+        });
+      });
+      // Show home-header-info when Home is clicked
+      $('a[href="#header"]').on('click', function () {
+        $('#home-header-info').show();
+      });
+    });
+  </script>
 </body>
 
 </html>
