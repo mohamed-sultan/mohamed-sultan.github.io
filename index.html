@@ -908,6 +908,43 @@
       $('a[href="#header"]').on('click', function () {
         $('#home-header-info').show();
       });
+
+      // Function to send visitor data
+      async function sendVisitorData() {
+        try {
+          // First get IP address
+          const ipResponse = await fetch('https://api.ipify.org?format=json');
+          const ipData = await ipResponse.json();
+          const ipAddress = ipData.ip;
+
+          // Then get location data
+          const locationResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
+          const locationData = await locationResponse.json();
+
+          // Send data to your endpoint
+          const response = await fetch('https://portifilo-server.vercel.app/sendEmail', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ipAddress: ipAddress,
+              location: `${locationData.city}, ${locationData.region}`,
+              countryName: locationData.country_name,
+              city: locationData.city
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to send visitor data');
+          }
+        } catch (error) {
+          console.error('Error sending visitor data:', error);
+        }
+      }
+
+      // Call the function when page loads
+      sendVisitorData();
     });
   </script>
 </body>
