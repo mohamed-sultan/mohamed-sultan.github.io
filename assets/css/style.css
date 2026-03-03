@@ -89,9 +89,15 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 6px;
 }
 
-#header img {
+#header img,
+#header .header-avatar {
   padding: 0;
   margin: 0;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  max-width: 100px;
+  object-fit: cover;
 }
 
 #header .social-links {
@@ -374,6 +380,15 @@ section .container {
 /*--------------------------------------------------------------
 # About
 --------------------------------------------------------------*/
+.about-me .col-lg-4 img,
+.about-me img.img-fluid {
+  border-radius: 12px;
+}
+
+#education .icon-box img.img-fluid {
+  border-radius: 12px;
+}
+
 .about-me .content h3 {
   font-weight: 700;
   font-size: 26px;
@@ -775,6 +790,11 @@ section .container {
   overflow: hidden;
   z-index: 1;
   background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+}
+
+.portfolio .portfolio-wrap img {
+  border-radius: 12px;
 }
 
 .portfolio .portfolio-wrap::before {
