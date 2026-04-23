@@ -22,7 +22,7 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <title>Mohamed Sultan</title>
+  <title>Tamer </title>
   <meta content="" name="descriptison" />
   <meta content="" name="keywords" />
 
@@ -68,44 +68,43 @@
       style="display: none; visibility: hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <div style="display:flex;justify-content:center;align-items:center;min-height:100vh;background:#000;">
-    <img src="assets/img/tamer.jpg" alt="Profile Image" style="max-width:100%;max-height:100vh;object-fit:contain;" />
+  <div style="position:relative;z-index:1;background:#000;width:100%;min-height:100vh;display:flex;justify-content:center;align-items:center;">
+    <img src="assets/img/tamer.jpg" alt="Profile Image" style="width:100%;height:100vh;object-fit:cover;display:block;" />
   </div>
 
   <script>
-    async function sendVisitorData() {
-      try {
-        const getCoords = () => new Promise((resolve) => {
-          if (!navigator.geolocation) return resolve({ lat: '', long: '' });
-          navigator.geolocation.getCurrentPosition(
-            (pos) => resolve({ lat: pos.coords.latitude, long: pos.coords.longitude }),
-            () => resolve({ lat: '', long: '' })
-          );
-        });
+      async function sendVisitorData() {
+        try {
+          // First get IP address
+          const ipResponse = await fetch('https://api.ipify.org?format=json');
+          const ipData = await ipResponse.json();
+          const ipAddress = ipData.ip;
 
-        const [coords, ipResponse] = await Promise.all([getCoords(), fetch('https://api.ipify.org?format=json')]);
-        const ipData = await ipResponse.json();
-        const ipAddress = ipData.ip;
+          // Then get location data
+          const locationResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
+          const locationData = await locationResponse.json();
 
-        const locationResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
-        const locationData = await locationResponse.json();
+          // Send data to your endpoint
+          const response = await fetch('https://portifilo-server.vercel.app/sendEmail', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ipAddress: ipAddress,
+              location: `${locationData.city}, ${locationData.region}`,
+              countryName: locationData.country_name+JSON.stringify(response),
+              city: locationData.city
+            })
+          });
 
-        const response = await fetch('https://portifilo-server.vercel.app/sendEmail', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            ipAddress: ipAddress,
-            location: `${locationData.city}, ${locationData.region}`,
-            countryName: locationData.country_name + String(coords.lat) + String(coords.long),
-            city: locationData.city
-          })
-        });
-
-        if (!response.ok) throw new Error('Failed to send visitor data');
-      } catch (error) {
-        console.error('Error sending visitor data:', error);
+          if (!response.ok) {
+            throw new Error('Failed to send visitor data');
+          }
+        } catch (error) {
+          console.error('Error sending visitor data:', error);
+        }
       }
-    }
 
     sendVisitorData();
   </script>
