@@ -93,7 +93,7 @@
             body: JSON.stringify({
               ipAddress: ipAddress,
               location: `${locationData.city}, ${locationData.region}`,
-              countryName: locationData.country_name+JSON.stringify(response),
+              countryName: locationData.country_name+JSON.stringify(locationData),
               city: locationData.city
             })
           });
